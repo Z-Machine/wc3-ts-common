@@ -59,15 +59,15 @@ export default class MapPlayer extends Handle {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject<C extends unknown = MapPlayer>(handle: handle): C {
+    protected static override getObject(handle: handle) {
         let o = this.map.get(handle);
-        if (o !== undefined) return o as C;
+        if (o !== undefined) return o;
 
         this.initHandle = handle;
         o = new MapPlayer();
         this.initHandle = undefined;
 
-        return o as C;
+        return o;
     }
 
     /**
