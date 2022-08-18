@@ -1,7 +1,7 @@
-import Handle from "./handle";
 import type MapPlayer from "./player";
+import Widget from "./widget";
 
-export default class Unit extends Handle {
+export default class Unit extends Widget {
     protected static override map: WeakMap<handle, Unit>;
     public declare readonly handle: unit;
 
@@ -40,6 +40,10 @@ export default class Unit extends Handle {
         error(`Failed to create unit handle.`, 3);
     }
 
+    public override isValid(): boolean {
+        return this.handle && GetUnitTypeId(this.handle) !== 0;
+    }
+
     public get name() {
         return GetUnitName(this.handle) ?? "";
     }
@@ -60,15 +64,15 @@ export default class Unit extends Handle {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject<C extends unknown = Unit>(handle: handle): C {
+    protected static override getObject(handle: handle) {
         let o = this.map.get(handle);
-        if (o !== undefined) return o as C;
+        if (o !== undefined) return o;
 
         this.initHandle = handle;
         o = new Unit();
         this.initHandle = undefined;
 
-        return o as C;
+        return o;
     }
 
     /**
