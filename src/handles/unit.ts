@@ -6,14 +6,12 @@ export default class Unit extends Widget {
     public declare readonly handle: unit;
 
     /**
-     *
      * @param owner required
      * @param unitId required
      * @param x required
      * @param y required
      * @param face defaults to `bj_UNIT_FACING`
      * @param skinId optional
-     * @returns
      */
     public constructor(owner?: MapPlayer, unitId?: number, x?: number, y?: number, face?: number, skinId?: number);
     public constructor(owner: MapPlayer, unitId: number, x: number, y: number, face?: number, skinId?: number) {
@@ -26,7 +24,9 @@ export default class Unit extends Widget {
             error(`Unit.Constructor missing required parameters.`, 3);
         }
 
-        face = bj_UNIT_FACING;
+        if (face === undefined) {
+            face = bj_UNIT_FACING;
+        }
 
         const handle = skinId
             ? BlzCreateUnitWithSkin(owner.handle, unitId, x, y, face, skinId)
@@ -40,8 +40,8 @@ export default class Unit extends Widget {
         error(`Failed to create unit handle.`, 3);
     }
 
-    public override isValid(): boolean {
-        return this.handle && GetUnitTypeId(this.handle) !== 0;
+    public override isValid(): this is Unit {
+        return GetUnitTypeId(this.handle) !== 0;
     }
 
     public get name() {
@@ -73,12 +73,5 @@ export default class Unit extends Widget {
         this.initHandle = undefined;
 
         return o;
-    }
-
-    /**
-     * @async
-     */
-    public static fromLocal() {
-        return this.fromHandle(GetLocalPlayer())!;
     }
 }

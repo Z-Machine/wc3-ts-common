@@ -20,16 +20,12 @@ export default abstract class Handle {
     /**
      * Checks if the handle really exists.
      */
-    public isValid(): boolean {
-        return this.handle !== undefined;
+    public isValid(): this is Handle {
+        return GetHandleId(this.handle) !== 0;
     }
 
     public static fromHandle(handle?: handle) {
         return handle ? this.getObject(handle) : undefined;
-    }
-
-    protected static initFromHandle(): boolean {
-        return this.initHandle !== undefined;
     }
 
     protected static getObject(handle: handle): Handle {

@@ -9,13 +9,13 @@ export default class Force extends Handle implements IDestroyable {
     protected static override map: WeakMap<handle, Force>;
     public declare readonly handle: force;
 
-    protected constructor() {
+    protected constructor(handle?: force) {
         if (Force.initHandle) {
             super(Force.initHandle);
             return;
         }
 
-        const handle = CreateForce();
+        handle = handle ?? CreateForce();
         if (handle) {
             super(handle);
             Force.map.set(handle, this);
@@ -66,7 +66,7 @@ export default class Force extends Handle implements IDestroyable {
 
         ForForce(this.handle, () => {
             const pl = MapPlayer.fromHandle(GetEnumPlayer());
-            if (pl) {
+            if (pl?.isValid()) {
                 players.push(pl);
             }
         });
