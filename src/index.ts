@@ -3,6 +3,6 @@
 
 /// <reference path="../node_modules/typescript-to-lua/language-extensions/index.d.ts"/>
 /// <reference path="../node_modules/lua-types/5.3.d.ts"/>
-/// <reference path="../node_modules/war3-types-strict/1.32.10.d.ts"/>
+/// <reference path="../node_modules/war3-types-strict/1.33.0.d.ts"/>
 
 export * from "handles";
