@@ -20,7 +20,7 @@ export default class Point extends Handle implements IDestroyable {
         }
 
         const handle = Location(x, y);
-        if (handle) {
+        if (handle !== undefined) {
             super(handle);
             Point.map.set(handle, this);
             return;
