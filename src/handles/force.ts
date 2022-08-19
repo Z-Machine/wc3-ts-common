@@ -1,9 +1,6 @@
+import { AnyFilter, asFilter } from "../types/filter";
 import Handle, { IDestroyable } from "./handle";
 import MapPlayer from "./player";
-
-// TODO: move these to a filter file?
-export type AnyFilter = boolexpr | (() => boolean);
-export const asFilter = (filter: AnyFilter) => (typeof filter === "function" ? Filter(filter) : filter);
 
 export default class Force extends Handle implements IDestroyable {
     protected static override map: WeakMap<handle, Force>;
