@@ -4,14 +4,10 @@ export default class Group extends Handle {
     protected static override map: WeakMap<group, Group>;
     public declare readonly handle: group;
 
-    public constructor(campaignFile: string) {
+    public constructor() {
         if (Group.initHandle) {
             super(Group.initHandle);
             return;
-        }
-
-        if (campaignFile === undefined) {
-            error(`GameCache.Constructor missing required parameters.`, 3);
         }
 
         const handle = CreateGroup();
