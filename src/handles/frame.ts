@@ -1,7 +1,7 @@
 import Handle from "./handle";
 
 export default class Frame extends Handle {
-    protected static override map: WeakMap<handle, Frame>;
+    protected static override map: WeakMap<framehandle, Frame>;
     public declare readonly handle: framehandle;
 
     public constructor(name: string, owner: Frame, priority: number, createContext: number) {
@@ -29,7 +29,7 @@ export default class Frame extends Handle {
     }
 
     public static fromEvent() {
-        return this.fromHandle(GetTriggeringTrackable());
+        return this.fromHandle(BlzGetTriggerFrame());
     }
 
     public static fromSimple(name: string, owner: Frame, createContext: number) {
@@ -40,11 +40,11 @@ export default class Frame extends Handle {
         return this.fromHandle(BlzCreateFrameByType(typeName, name, owner.handle, inherits, createContext));
     }
 
-    public static fromHandle(handle?: handle) {
+    public static fromHandle(handle?: framehandle) {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject(handle: handle) {
+    protected static override getObject(handle: framehandle) {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
 
