@@ -13,6 +13,7 @@ export * from "./group";
 export * from "./handle";
 export * from "./image";
 export * from "./item";
+export * from "./leaderboard";
 export * from "./player";
 export * from "./point";
 export * from "./rect";
