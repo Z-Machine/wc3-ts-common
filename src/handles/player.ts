@@ -11,9 +11,11 @@ export default class MapPlayer extends Handle {
             return;
         }
 
-        assert(index !== undefined, `MapPlayer.Constructor missing index.`);
+        if (index === undefined) {
+            error(`MapPlayer.Constructor missing required parameters.`, 3);
+        }
 
-        const handle = Player(index!);
+        const handle = Player(index);
         if (handle) {
             super(handle);
             MapPlayer.map.set(handle, this);
