@@ -9,6 +9,7 @@ export * from "./fogmodifier";
 export * from "./force";
 export * from "./frame";
 export * from "./gamecache";
+export * from "./group";
 export * from "./handle";
 export * from "./item";
 export * from "./player";
