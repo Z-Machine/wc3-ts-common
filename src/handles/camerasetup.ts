@@ -2,10 +2,10 @@ import Handle from "./handle";
 import Point from "./point";
 
 export default class CameraSetup extends Handle {
-    protected static override map: WeakMap<handle, CameraSetup>;
+    protected static override map: WeakMap<camerasetup, CameraSetup>;
     public declare readonly handle: camerasetup;
 
-    constructor() {
+    public constructor() {
         if (CameraSetup.initHandle) {
             super(CameraSetup.initHandle);
             CameraSetup.map.set(this.handle, this);

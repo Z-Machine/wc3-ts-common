@@ -4,7 +4,7 @@ import type MapPlayer from "./player";
 
 // TODO: add example usage.
 export default class Dialog extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Dialog>;
+    protected static override map: WeakMap<dialog, Dialog>;
     public declare readonly handle: dialog;
 
     public constructor() {

@@ -2,10 +2,10 @@ import Handle, { IDestroyable } from "./handle";
 import type Timer from "./timer";
 
 export default class TimerDialog extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, TimerDialog>;
+    protected static override map: WeakMap<timerdialog, TimerDialog>;
     public declare readonly handle: timerdialog;
 
-    protected constructor(handle?: timerdialog) {
+    protected constructor(handle: timerdialog) {
         if (TimerDialog.initHandle) {
             super(TimerDialog.initHandle);
             return;
@@ -73,14 +73,11 @@ export default class TimerDialog extends Handle implements IDestroyable {
     }
 
     public static fromTimer(whichTimer: Timer) {
-        const handle = CreateTimerDialog(whichTimer.handle);
-        if (handle !== undefined) {
-            return new TimerDialog(handle);
-        }
+        return this.fromHandle(CreateTimerDialog(whichTimer.handle));
     }
 
     public static fromHandle(handle?: timerdialog) {
-        return handle ? this.getObject(handle) : undefined;
+        return handle !== undefined ? this.getObject(handle) : undefined;
     }
 
     protected static override getObject(handle: timerdialog) {
@@ -88,7 +85,7 @@ export default class TimerDialog extends Handle implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new TimerDialog();
+        o = new (TimerDialog as any)() as TimerDialog;
         this.initHandle = undefined;
 
         return o;

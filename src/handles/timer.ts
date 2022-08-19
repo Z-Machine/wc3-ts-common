@@ -1,7 +1,7 @@
 import Handle, { IDestroyable } from "./handle";
 
 export default class Timer extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Timer>;
+    protected static override map: WeakMap<timer, Timer>;
     public declare readonly handle: timer;
 
     public constructor() {

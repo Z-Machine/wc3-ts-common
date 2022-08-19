@@ -1,16 +1,9 @@
 import Widget from "./widget";
 
 export default class Item extends Widget {
-    protected static override map: WeakMap<handle, Item>;
+    protected static override map: WeakMap<item, Item>;
     public declare readonly handle: item;
 
-    /**
-     * @param itemId required
-     * @param x required
-     * @param y required
-     * @param skinId optional
-     */
-    public constructor(itemId?: number, x?: number, y?: number, skinId?: number);
     public constructor(itemId: number, x: number, y: number, skinId?: number) {
         if (Item.initHandle) {
             super(Item.initHandle);
@@ -61,7 +54,7 @@ export default class Item extends Widget {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Item();
+        o = new (Item as any)() as Item;
         this.initHandle = undefined;
 
         return o;

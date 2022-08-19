@@ -4,13 +4,13 @@ import type Point from "./point";
 import type Widget from "./widget";
 
 export default class Effect extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Effect>;
+    protected static override map: WeakMap<effect, Effect>;
     public declare readonly handle: effect;
 
     public readonly attachWidget?: Widget;
     public readonly attachPointName?: string;
 
-    protected constructor(handle?: effect, attachWidget?: Widget, attachPointName?: string) {
+    protected constructor(handle: effect, attachWidget?: Widget, attachPointName?: string) {
         if (Effect.initHandle) {
             super(Effect.initHandle);
             Effect.map.set(this.handle, this);
@@ -231,7 +231,7 @@ export default class Effect extends Handle implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Effect();
+        o = new (Effect as any)() as Effect;
         this.initHandle = undefined;
 
         return o;

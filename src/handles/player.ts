@@ -2,10 +2,10 @@ import type Force from "./force";
 import Handle from "./handle";
 
 export default class MapPlayer extends Handle {
-    protected static override map: WeakMap<handle, MapPlayer>;
+    protected static override map: WeakMap<player, MapPlayer>;
     public declare readonly handle: player;
 
-    protected constructor(index?: number) {
+    protected constructor(index: number) {
         if (MapPlayer.initHandle) {
             super(MapPlayer.initHandle);
             return;
@@ -57,16 +57,16 @@ export default class MapPlayer extends Handle {
         return this.fromHandle(Player(index));
     }
 
-    public static fromHandle(handle?: handle) {
+    public static fromHandle(handle?: player) {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject(handle: handle) {
+    protected static override getObject(handle: player) {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new MapPlayer();
+        o = new (MapPlayer as any)() as MapPlayer;
         this.initHandle = undefined;
 
         return o;

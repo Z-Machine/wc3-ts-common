@@ -2,29 +2,9 @@ import { IDestroyable } from "./handle";
 import Widget from "./widget";
 
 export default class Destructable extends Widget implements IDestroyable {
-    protected static override map: WeakMap<handle, Destructable>;
+    protected static override map: WeakMap<destructable, Destructable>;
     public declare readonly handle: destructable;
 
-    /**
-     * @param objectId required
-     * @param x required
-     * @param y required
-     * @param z optional
-     * @param face required
-     * @param scale required
-     * @param variation required
-     * @param skinId optional
-     */
-    public constructor(
-        objectId?: number,
-        x?: number,
-        y?: number,
-        z?: number,
-        face?: number,
-        scale?: number,
-        variation?: number,
-        skinId?: number
-    );
     public constructor(
         objectId: number,
         x: number,
@@ -128,7 +108,7 @@ export default class Destructable extends Widget implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Destructable();
+        o = new (Destructable as any)() as Destructable;
         this.initHandle = undefined;
 
         return o;

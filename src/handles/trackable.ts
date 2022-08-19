@@ -4,7 +4,7 @@ import Handle from "./handle";
  * Should you really be using these?
  */
 export default class Trackable extends Handle {
-    protected static override map: WeakMap<handle, Trackable>;
+    protected static override map: WeakMap<trackable, Trackable>;
     public declare readonly handle: trackable;
 
     public constructor(modelPath: string, x: number, y: number, facing: number) {
@@ -35,11 +35,11 @@ export default class Trackable extends Handle {
         return this.fromHandle(GetTriggeringTrackable());
     }
 
-    public static fromHandle(handle?: handle) {
+    public static fromHandle(handle?: trackable) {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject(handle: handle) {
+    protected static override getObject(handle: trackable) {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
 

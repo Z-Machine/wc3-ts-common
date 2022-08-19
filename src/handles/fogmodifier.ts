@@ -3,10 +3,10 @@ import MapPlayer from "./player";
 import type Rectangle from "./rect";
 
 export class FogModifier extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, FogModifier>;
+    protected static override map: WeakMap<fogmodifier, FogModifier>;
     public declare readonly handle: fogmodifier;
 
-    protected constructor(handle?: fogmodifier) {
+    protected constructor(handle: fogmodifier) {
         if (FogModifier.initHandle) {
             super(FogModifier.initHandle);
             FogModifier.map.set(this.handle, this);
@@ -96,7 +96,7 @@ export class FogModifier extends Handle implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new FogModifier();
+        o = new (FogModifier as any)() as FogModifier;
         this.initHandle = undefined;
 
         return o;

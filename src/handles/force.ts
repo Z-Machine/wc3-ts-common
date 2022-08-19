@@ -3,16 +3,16 @@ import Handle, { IDestroyable } from "./handle";
 import MapPlayer from "./player";
 
 export default class Force extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Force>;
+    protected static override map: WeakMap<force, Force>;
     public declare readonly handle: force;
 
-    protected constructor(handle?: force) {
+    public constructor() {
         if (Force.initHandle) {
             super(Force.initHandle);
             return;
         }
 
-        handle = handle ?? CreateForce();
+        const handle = CreateForce();
         if (handle) {
             super(handle);
             Force.map.set(handle, this);
@@ -79,16 +79,16 @@ export default class Force extends Handle implements IDestroyable {
         ForceRemovePlayer(this.handle, whichPlayer.handle);
     }
 
-    public static override fromHandle(handle?: handle) {
+    public static override fromHandle(handle?: force) {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject(handle: handle): Force {
+    protected static override getObject(handle: force): Force {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Force();
+        o = new (Force as any)() as Force;
         this.initHandle = undefined;
 
         return o;

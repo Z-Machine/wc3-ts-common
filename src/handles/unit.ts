@@ -2,18 +2,9 @@ import type MapPlayer from "./player";
 import Widget from "./widget";
 
 export default class Unit extends Widget {
-    protected static override map: WeakMap<handle, Unit>;
+    protected static override map: WeakMap<unit, Unit>;
     public declare readonly handle: unit;
 
-    /**
-     * @param owner required
-     * @param unitId required
-     * @param x required
-     * @param y required
-     * @param face defaults to `bj_UNIT_FACING`
-     * @param skinId optional
-     */
-    public constructor(owner?: MapPlayer, unitId?: number, x?: number, y?: number, face?: number, skinId?: number);
     public constructor(owner: MapPlayer, unitId: number, x: number, y: number, face?: number, skinId?: number) {
         if (Unit.initHandle) {
             super(Unit.initHandle);
@@ -60,16 +51,16 @@ export default class Unit extends Widget {
         return this.fromHandle(GetFilterUnit());
     }
 
-    public static fromHandle(handle?: handle) {
+    public static fromHandle(handle?: unit) {
         return handle ? this.getObject(handle) : undefined;
     }
 
-    protected static override getObject(handle: handle) {
+    protected static override getObject(handle: unit) {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Unit();
+        o = new (Unit as any)() as Unit;
         this.initHandle = undefined;
 
         return o;

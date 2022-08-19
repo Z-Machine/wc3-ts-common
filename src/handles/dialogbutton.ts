@@ -2,7 +2,7 @@ import type Dialog from "./dialog";
 import Handle from "./handle";
 
 export default class DialogButton extends Handle {
-    protected static override map: WeakMap<handle, DialogButton>;
+    protected static override map: WeakMap<button, DialogButton>;
     public declare readonly handle: button;
 
     public constructor(

@@ -3,17 +3,17 @@ import type Item from "./item";
 import type Unit from "./unit";
 
 export default class Ability extends Handle {
-    protected static override map: WeakMap<handle, Ability>;
+    protected static override map: WeakMap<ability, Ability>;
     public declare readonly handle: ability;
 
-    protected constructor(handle?: ability) {
+    protected constructor(handle: ability) {
         if (Ability.initHandle) {
             super(Ability.initHandle);
             Ability.map.set(this.handle, this);
             return;
         }
 
-        if (handle) {
+        if (handle !== undefined) {
             super(handle);
             Ability.map.set(handle, this);
             return;
@@ -63,7 +63,7 @@ export default class Ability extends Handle {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Ability();
+        o = new (Ability as any)() as Ability;
         this.initHandle = undefined;
 
         return o;

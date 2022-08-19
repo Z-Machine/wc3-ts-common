@@ -5,10 +5,10 @@ import type Point from "./point";
 import type Unit from "./unit";
 
 export default class Rectangle extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Rectangle>;
+    protected static override map: WeakMap<rect, Rectangle>;
     public declare readonly handle: rect;
 
-    public constructor(minX?: number, minY?: number, maxX?: number, maxY?: number) {
+    public constructor(minX: number, minY: number, maxX: number, maxY: number) {
         if (Rectangle.initHandle) {
             super(Rectangle.initHandle);
             Rectangle.map.set(this.handle, this);
@@ -126,7 +126,7 @@ export default class Rectangle extends Handle implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Rectangle();
+        o = new (Rectangle as any)() as Rectangle;
         this.initHandle = undefined;
 
         return o;

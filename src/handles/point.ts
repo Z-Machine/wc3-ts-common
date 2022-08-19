@@ -1,14 +1,10 @@
 import Handle, { IDestroyable } from "./handle";
 
 export default class Point extends Handle implements IDestroyable {
-    protected static override map: WeakMap<handle, Point>;
+    protected static override map: WeakMap<location, Point>;
     public declare readonly handle: location;
 
-    /**
-     * @param x required
-     * @param y required
-     */
-    protected constructor(x?: number, y?: number) {
+    protected constructor(x: number, y: number) {
         if (Point.initHandle) {
             super(Point.initHandle);
             Point.map.set(this.handle, this);
@@ -48,7 +44,7 @@ export default class Point extends Handle implements IDestroyable {
         if (o !== undefined) return o;
 
         this.initHandle = handle;
-        o = new Point();
+        o = new (Point as any)() as Point;
         this.initHandle = undefined;
 
         return o;
