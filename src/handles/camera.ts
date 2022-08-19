@@ -263,7 +263,7 @@ export class CameraSetup extends Handle {
         }
 
         const handle = CreateCameraSetup();
-        if (handle) {
+        if (handle !== undefined) {
             super(handle);
             CameraSetup.map.set(handle, this);
             return;
