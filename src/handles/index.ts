@@ -20,6 +20,7 @@ export * from "./player";
 export * from "./point";
 export * from "./rect";
 export * from "./region";
+export * from "./sound";
 export * from "./timer";
 export * from "./timerdialog";
 export * from "./trackable";
