@@ -1,5 +1,5 @@
 import Handle, { IDestroyable } from "./handle";
-import Multiboard from "./multiboard";
+import type Multiboard from "./multiboard";
 
 export default class MultiboardItem extends Handle implements IDestroyable {
     protected static override map: WeakMap<multiboarditem, MultiboardItem>;
