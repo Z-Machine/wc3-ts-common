@@ -19,9 +19,6 @@ export const enum ImageType {
     Ubersplat = 4,
 }
 
-/**
- * @CustomConstructor Image.new
- */
 export default class Image extends Handle implements IDestroyable {
     protected static override map: WeakMap<image, Image>;
     public declare readonly handle: image;
