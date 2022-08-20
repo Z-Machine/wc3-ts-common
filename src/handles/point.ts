@@ -1,4 +1,5 @@
 import Handle, { IDestroyable } from "./handle";
+import type MapPlayer from "./player";
 
 export default class Point extends Handle implements IDestroyable {
     protected static override map: WeakMap<location, Point>;
@@ -26,13 +27,48 @@ export default class Point extends Handle implements IDestroyable {
         error(`Failed to create point handle.`, 3);
     }
 
-    destroy(): void {
+    public destroy(): void {
         Point.map.delete(this.handle);
         RemoveLocation(this.handle);
     }
 
     public override isValid(): this is Point {
-        return GetHandleId(this.handle) !== 0;
+        return GetHandleId(this.handle) !== -1;
+    }
+
+    public get x() {
+        return GetLocationX(this.handle);
+    }
+
+    public set x(v: number) {
+        MoveLocation(this.handle, v, this.y);
+    }
+
+    public get y() {
+        return GetLocationY(this.handle);
+    }
+
+    public set y(v: number) {
+        MoveLocation(this.handle, this.x, v);
+    }
+
+    /**
+     * This function is asynchronous. The values it returns are not guaranteed synchronous between each player.
+     * If you attempt to use it in a synchronous manner, it may cause a desync.
+     * @note Reasons for returning different values might be terrain-deformations caused by spells/abilities and different graphic settings.
+     * Other reasons could be the rendering state of destructables and visibility differences.
+     * @async
+     */
+    public get z() {
+        return GetLocationZ(this.handle);
+    }
+
+    public setPosition(x: number, y: number) {
+        MoveLocation(this.handle, x, y);
+    }
+
+    public static fromPlayerStart(whichPlayer: MapPlayer) {
+        return this.fromHandle(GetStartLocationLoc(GetPlayerStartLocation(whichPlayer.handle)));
     }
 
     public static fromHandle(handle?: location) {
