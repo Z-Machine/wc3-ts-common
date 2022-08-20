@@ -55,6 +55,10 @@ export default class MultiboardItem extends Handle implements IDestroyable {
         return handle ? this.getObject(handle) : undefined;
     }
 
+    public static fromMultiboard(whichMultiboard: Multiboard, x: number, y: number) {
+        return this.fromHandle(MultiboardGetItem(whichMultiboard.handle, x - 1, y - 1));
+    }
+
     protected static override getObject(handle: multiboarditem) {
         let o = this.map.get(handle);
         if (o !== undefined) return o;
