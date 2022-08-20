@@ -21,7 +21,7 @@ export default abstract class Handle {
      * Checks if the handle really exists.
      */
     public isValid(): this is Handle {
-        return GetHandleId(this.handle) !== 0;
+        return GetHandleId(this.handle) !== -1;
     }
 
     public static fromHandle(handle?: handle) {
