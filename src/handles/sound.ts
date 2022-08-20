@@ -147,12 +147,25 @@ export default class Sound extends Handle {
      * Increasing it you get the chipmunk version and the sound becomes shorter, when decremented the sound becomes low-pitched and longer.
      * @param pitch
      * @bug This native has very weird behaviour.
-     * See [this](http://www.hiveworkshop.com/threads/setsoundpitch-weirdness.215743/#post-2145419) for an explenation
+     * See [this](http://www.hiveworkshop.com/threads/setsoundpitch-weirdness.215743/#post-2145419) for an explanation
      * and [this](http://www.hiveworkshop.com/threads/snippet-rapidsound.258991/#post-2611724) for a non-bugged implementation.
      */
     public setPitch(pitch: number) {
+        if (this.playing || this.loading) {
+            SetSoundPitch(this.handle, 1 / this._lastPitch);
+            SetSoundPitch(this.handle, pitch);
+            this._lastPitch = pitch;
+            return;
+        }
+
+        if (pitch === 1) pitch = 1.0001;
+
         SetSoundPitch(this.handle, pitch);
+        this._lastPitch = pitch;
     }
+
+    /** @internal */
+    protected _lastPitch: number = 1;
 
     /**
      * Must be called immediately after starting the sound
