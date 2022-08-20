@@ -14,8 +14,8 @@ export default class Item extends Widget {
             error(`Item.Constructor missing required parameters.`, 3);
         }
 
-        const handle = skinId ? BlzCreateItemWithSkin(itemId, x, y, skinId) : CreateItem(itemId, x, y);
-        if (handle) {
+        const handle = skinId === undefined ? CreateItem(itemId, x, y) : BlzCreateItemWithSkin(itemId, x, y, skinId);
+        if (handle !== undefined) {
             super(handle);
             Item.map.set(handle, this);
             return;
