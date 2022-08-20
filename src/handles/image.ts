@@ -98,6 +98,62 @@ export default class Image extends Handle implements IDestroyable {
         Image.map.delete(this.handle);
     }
 
+    /**
+     * Every ImageType other than Selection doesnt seem to appear above water.
+     * @param flag Draws the specified image above the water if the flag is true.
+     * @param useWaterAlpha
+     */
+    public setAboveWater(flag: boolean, useWaterAlpha: boolean) {
+        SetImageAboveWater(this.handle, flag, useWaterAlpha);
+    }
+
+    public setColor(red: number, green: number, blue: number, alpha: number) {
+        SetImageColor(this.handle, red, green, blue, alpha);
+    }
+
+    /**
+     * This is the only function that is able to modify an image's z-offset.
+     * @param flag
+     * @param height The z-offset of the image.
+     */
+    public setConstantHeight(flag: boolean, height: number) {
+        SetImageConstantHeight(this.handle, flag, height);
+    }
+
+    /**
+     * Sets the X/Y position of the provided image. This is the bottom left corner of the image, unless you used values
+     * form originX/Y/Z in the constructor other than 0, in which case the bottom left corner is moved further into negative
+     * X/Y/Z direction.
+     */
+    public setPosition(x: number, y: number, z: number) {
+        SetImagePosition(this.handle, x, y, z);
+    }
+
+    /**
+     * Enable or disable the rendering of the image.
+     * @param flag render if true, don't render if false
+     */
+    public setRender(flag: boolean) {
+        SetImageRenderAlways(this.handle, flag);
+    }
+
+    /**
+     * Change image's type.
+     * @param imageType  Influence the order in which images are drawn above one another.
+     */
+    public setType(imageType: ImageType) {
+        SetImageType(this.handle, imageType);
+    }
+
+    /**
+     * Show or hide the image depending on boolean flag.
+     * Seems like a redundant function in the light of SetImageRender(Always).
+     * @param flag true shows, false hides
+     */
+    public show(flag: boolean) {
+        ShowImage(this.handle, flag);
+    }
+
     public static fromHandle(handle?: image) {
         return handle ? this.getObject(handle) : undefined;
     }
