@@ -42,6 +42,10 @@ export default class Unit extends Widget implements IDestroyable {
         RemoveUnit(this.handle);
     }
 
+    public get typeId() {
+        return GetUnitTypeId(this.handle);
+    }
+
     public get name() {
         return GetUnitName(this.handle) ?? "";
     }

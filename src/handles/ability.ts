@@ -18,7 +18,11 @@ export default class Ability extends Handle {
     }
 
     public override isValid(): this is Ability {
-        return GetHandleId(this.handle) !== -1;
+        return BlzGetAbilityId(this.handle) !== 0;
+    }
+
+    public get typeId() {
+        return BlzGetAbilityId(this.handle);
     }
 
     public get name() {
