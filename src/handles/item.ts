@@ -206,22 +206,6 @@ export default class Item extends Widget implements IDestroyable {
         SetItemDroppable(this.handle, flag);
     }
 
-    public addAbility(abilCode: number) {
-        return BlzItemAddAbility(this.handle, abilCode);
-    }
-
-    public getAbility(abilCode: number) {
-        return Ability.fromItem(this, abilCode);
-    }
-
-    public getAbilityByIndex(index: number) {
-        return Ability.fromItemIndex(this, index);
-    }
-
-    public removeAbility(abilCode: number) {
-        return BlzItemRemoveAbility(this.handle, abilCode);
-    }
-
     public getOwner() {
         return MapPlayer.fromHandle(GetItemPlayer(this.handle));
     }
@@ -238,6 +222,25 @@ export default class Item extends Widget implements IDestroyable {
         SetItemPosition(this.handle, x, y);
     }
 
+    //#region Ability spam
+
+    public addAbility(abilCode: number) {
+        return BlzItemAddAbility(this.handle, abilCode);
+    }
+
+    public getAbility(abilCode: number) {
+        return Ability.fromItem(this, abilCode);
+    }
+
+    public getAbilityByIndex(index: number) {
+        return Ability.fromItemIndex(this, index);
+    }
+
+    public removeAbility(abilCode: number) {
+        return BlzItemRemoveAbility(this.handle, abilCode);
+    }
+
+    //#endregion Ability spam
     //#region Field spam
 
     public getBoolean(whichField: itembooleanfield) {
@@ -253,7 +256,7 @@ export default class Item extends Widget implements IDestroyable {
     }
 
     public getString(whichField: itemstringfield) {
-        return BlzGetItemStringField(this.handle, whichField);
+        return BlzGetItemStringField(this.handle, whichField) ?? "";
     }
 
     public setBoolean(whichField: itembooleanfield, value: boolean) {
