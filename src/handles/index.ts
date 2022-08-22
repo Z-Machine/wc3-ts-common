@@ -25,5 +25,6 @@ export * from "./timer";
 export * from "./timerdialog";
 export * from "./trackable";
 export * from "./trigger";
+export * from "./ubersplat";
 export * from "./unit";
 export * from "./widget";
