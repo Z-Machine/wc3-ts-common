@@ -29,6 +29,18 @@ export default class QuestItem extends Handle {
         return GetHandleId(this.handle) !== 0;
     }
 
+    public setDescription(value: string) {
+        QuestItemSetDescription(this.handle, value);
+    }
+
+    public get completed() {
+        return IsQuestItemCompleted(this.handle);
+    }
+
+    public set completed(b: boolean) {
+        QuestItemSetCompleted(this.handle, b);
+    }
+
     public static fromHandle(handle?: questitem) {
         return handle ? this.getObject(handle) : undefined;
     }
