@@ -30,4 +30,5 @@ export * from "./trackable";
 export * from "./trigger";
 export * from "./ubersplat";
 export * from "./unit";
+export * from "./weathereffect";
 export * from "./widget";
