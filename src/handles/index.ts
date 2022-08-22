@@ -18,6 +18,8 @@ export * from "./multiboard";
 export * from "./multiboarditem";
 export * from "./player";
 export * from "./point";
+export * from "./quest";
+export * from "./questitem";
 export * from "./rect";
 export * from "./region";
 export * from "./sound";
