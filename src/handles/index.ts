@@ -23,6 +23,7 @@ export * from "./questitem";
 export * from "./rect";
 export * from "./region";
 export * from "./sound";
+export * from "./texttag";
 export * from "./timer";
 export * from "./timerdialog";
 export * from "./trackable";
