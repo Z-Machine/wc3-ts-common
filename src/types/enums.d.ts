@@ -16,8 +16,6 @@ export const enum Move {
 
 /** @flags */
 export const enum Target {
-    /** No idea what this does but it could exist. */
-    Unknown = 0,
     None = 1 << 0,
     Ground = 1 << 1,
     Air = 1 << 2,
@@ -67,8 +65,6 @@ export const enum Regeneration {
 
 /** @flags */
 export const enum UnitCategory {
-    /** No idea what this does but it could exist. */
-    Unknown = 0,
     Giant = 1 << 0,
     Undead = 1 << 1,
     Summoned = 1 << 2,

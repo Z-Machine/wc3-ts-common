@@ -1,3 +1,4 @@
+import { Move, Target, UnitCategory } from "../types/enums";
 import Ability from "./ability";
 import { IDestroyable } from "./handle";
 import type MapPlayer from "./player";
@@ -115,6 +116,51 @@ export default class Unit extends Widget implements IDestroyable {
      */
     public get collisionSize() {
         return BlzGetUnitCollisionSize(this.handle);
+    }
+
+    /**
+     * @flags
+     */
+    public get classification(): UnitCategory {
+        return this.getInteger(UNIT_IF_UNIT_CLASSIFICATION);
+    }
+
+    public set classification(v: number) {
+        this.setInteger(UNIT_IF_UNIT_CLASSIFICATION, v);
+    }
+
+    public hasClassification(whichClass: UnitCategory): boolean {
+        return (this.classification & whichClass) !== 0;
+    }
+
+    /**
+     * @flags
+     */
+    public get moveType(): Move {
+        return this.getInteger(UNIT_IF_MOVE_TYPE);
+    }
+
+    public set moveType(v: number) {
+        this.setInteger(UNIT_IF_MOVE_TYPE, v);
+    }
+
+    public hasMoveType(whichType: Move): boolean {
+        return (this.moveType & whichType) !== 0;
+    }
+
+    /**
+     * @flags
+     */
+    public get targetType(): Target {
+        return this.getInteger(UNIT_IF_TARGETED_AS);
+    }
+
+    public set targetType(v: number) {
+        this.setInteger(UNIT_IF_MOVE_TYPE, v);
+    }
+
+    public hasTargetType(whichType: Target): boolean {
+        return (this.targetType & whichType) !== 0;
     }
 
     //#region Hero
